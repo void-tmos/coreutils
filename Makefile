@@ -1,4 +1,10 @@
-all: tarball hash move clean
+all: check tarball hash clean move
+
+check:
+ifndef VERSION
+	@echo Warning: VERSION isn\'t defined\; continue? [Y/n]
+	@read line; if [ $$line = "n" ]; then echo aborting; exit 1 ; fi
+endif
 
 tarball: *.py
 	tar -cvf ${VERSION}.tar.xz $?
